@@ -10,40 +10,22 @@ public class MergeSorter {
 		}
 	}
 	
-	public static void merge(int[] list, int lo, int mid, int hi) {
-		
-		int listLen1;
-		int listLen2;
-		
-		if (list.length % 2 == 0) {
-			listLen1 = list.length / 2;
-			listLen2 = listLen1;
-		} else {
-			listLen1 = (list.length + 1) / 2;
-			listLen2 = list.length - listLen1;
-		}
-		
-		int[] swap1 = new int[listLen1];
-		int[] swap2 = new int[listLen2];
-		System.arraycopy(list, lo, swap1, 0, swap1.length - 1);
-		System.arraycopy(list, mid + 1, swap2, 0, swap2.length - 1);
-		int j = 0;
-		int k = 0;
-		for (int i = 0; i < list.length / 2 - 1; i++) {
-			if (swap1[j] > swap2[k]) {
-				if (j > i) {
-				continue;
-				} else {
-					list[i] = swap1[j];
-					j++;
-				}
-			} else if (swap1[j] < swap2[k]){
-				if (k > i)
-				list[i] = swap2[k];
-				k++;
+	public static void merge(int[] testArray, int lo, int mid, int hi) {
+		int p1 = lo;
+		int p2 = mid + 1;
+		int p3 = lo;
+		int[] swapList = new int[testArray.length];
+		while (p1 < mid && p2 < hi) {
+			if (testArray[p1] < testArray[p2]) {
+				swapList[p3] = testArray[p1];
+				p1++;
+				p3++;
+			} else {
+				swapList[p3] = testArray[p2];
+				p2++;
+				p3++;
 			}
 		}
-		
-	}
-	
+		System.arraycopy(testArray, 0, swapList, 0, testArray.length);
+    }
 }
